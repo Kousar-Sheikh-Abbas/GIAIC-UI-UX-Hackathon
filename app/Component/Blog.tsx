@@ -1,5 +1,4 @@
 import { Heart, MessageCircle, Share } from "lucide-react"; // For like, comment, and share icons
-import Image from "next/image";
 import bgImage1 from "../images/img26.jpg"; // Replace with your image paths
 import bgImage2 from "../images/img27.jpg";
 import bgImage3 from "../images/img28.jpg";
@@ -34,14 +33,11 @@ export default function BlogSection() {
             </div>
           </div>
         </div>
-
-        {/* Card 2 */}
         <div className="bg-cover bg-center relative rounded-lg" style={{ backgroundImage: `url(${bgImage2.src})` }}>
           <div className="bg-black bg-opacity-60 p-10 text-white rounded-lg">
             <p className="text-sm mb-2">February 5, 2024</p>
             <p className="text-lg mb-4">Blog Title 2</p>
             <p className="text-base mb-4">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-
             <div className="flex justify-between items-center">
               {/* Left: Learn More Button */}
               <button className="text-white border-0 bg-transparent hover:underline">Learn More</button>
@@ -83,7 +79,7 @@ export default function BlogSection() {
         {/* Left Section */}
         <div className="text-center md:text-left">
           <h3 className="text-2xl font-bold mb-4 ">Start, you need our support?</h3>
-          <p className="text-lg ">We're here to assist you in any way we can. Get in touch with us today.</p>
+          <p className="text-lg ">We are here to assist you in any way we can. Get in touch with us today.</p>
         </div>
 
         {/* Right Section: Email Input and Subscribe */}

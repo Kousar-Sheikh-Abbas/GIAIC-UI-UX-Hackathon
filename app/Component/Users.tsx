@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { Users, UtensilsCrossed, Smile } from "lucide-react";
 import bgImage from "../images/img21.jpg"; // Path to your background image
 

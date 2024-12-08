@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import bgImage from "../images/img25.jpg"; // Replace with your image path
 import { PlayCircle } from "lucide-react";
 
@@ -17,7 +17,7 @@ export default function ActiveProcess() {
       </div>
       <div className="w-full md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
         <h2 className="text-4xl font-bold mb-4 text-orange-500">
-          Our Restaurant's Active Process
+          Our Restaurants Active Process
         </h2>
         <p className=" mb-6">
           Discover how we prepare delicious meals with passion and dedication,

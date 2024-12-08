@@ -1,6 +1,4 @@
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"; // For social media icons
-import { Clock, MapPin } from "lucide-react"; // For icons like opening timings
-
 export default function Footer() {
   return (
     <footer className="bg-black text-white py-16">
@@ -14,7 +12,6 @@ export default function Footer() {
             the best dining experience with us.
           </p>
           <div className="flex items-center space-x-2">
-            <Clock className="w-5 h-5 text-white" />
             <span className="text-lg">Opening Hours: 9:00 AM - 9:00 PM</span>
           </div>
         </div>
