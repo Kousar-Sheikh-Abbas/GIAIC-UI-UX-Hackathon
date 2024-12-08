@@ -2,7 +2,7 @@ import Image from "next/image";
 import hero from "../images/img2.png"; // Replace with your image path
 import image from "../images/img6.png";
 import leaf from "../images/img5.png";
-import dish2 from "../images/img3.png";
+import dish1 from "../images/img4.png";
 import dish3 from "../images/img7.png";
 
 export default function HeroSection() {

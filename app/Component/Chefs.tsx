@@ -10,7 +10,7 @@ export default function MeetChefsTestimonials() {
         <p className="text-lg">Discover the masters behind our kitchen</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-        {["Chef John", "Chef Emily", "Chef Mark", "Chef Sarah"].map((chef, index) => (
+        {["Chef John", "Chef Emily","Chef Mark" ,"Chef Sarah"].map((chef, index) => (
           <div
             key={index}
             className="relative bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg"
@@ -48,7 +48,7 @@ export default function MeetChefsTestimonials() {
             />
           </div>
           <p className="text-gray-700 text-center italic mb-4">
-            "The food here is absolutely amazing! The service was excellent and the ambiance made our evening special. Highly recommend!"
+            The food here is absolutely amazing! The service was excellent and the ambiance made our evening special. Highly recommend!
           </p>
 
           {/* Rating */}
