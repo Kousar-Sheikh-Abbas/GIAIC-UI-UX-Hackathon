@@ -1,166 +1,109 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingCart, Heart, User } from "lucide-react"; // Add Heart and User icons
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [cart, setCart] = useState<any[]>([]); // Cart state
+  const [wishlist, setWishlist] = useState<any[]>([]); // Wishlist state
+  const [language, setLanguage] = useState("en"); // Language state
 
-  // Toggle the sidebar
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const savedWishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+    console.log('Cart:', savedCart);  // Check cart data
+    console.log('Wishlist:', savedWishlist);  // Check wishlist data
+    setCart(savedCart);
+    setWishlist(savedWishlist);
+  }, []); 
+
+  useEffect(() => {
+    // Update localStorage whenever cart or wishlist changes
+    if (cart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+    if (wishlist.length > 0) {
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+  }, [cart, wishlist]); // Runs whenever cart or wishlist changes
+
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value);
+    // Logic to change language can be added here, such as updating content
   };
 
-  return(
+  return (
     <>
+      {/* Language Dropdown Above the Logo */}
+      <div className="bg-black text-white p-2 text-center">
+        <select 
+          value={language} 
+          onChange={handleLanguageChange} 
+          className="bg-black flex ml-[1250px] text-white border-none"
+        >
+          <option value="en">English</option>
+          <option value="ur">Urdu</option>
+        </select>
+      </div>
+
       {/* Header Section */}
-      <header
-        className="relative  text-white" >
-        {/* Top Header */}
+      <header className="relative text-white bg-black">
         <div className="container mx-auto py-4 flex justify-center">
-          <h1 className="text-3xl mt-10 font-bold tracking-wide">Food<span className="text-orange-500">truck</span></h1>
+          <h1 className="text-3xl mt-10 font-bold tracking-wide">
+            Food<span className="text-orange-500">truck</span>
+          </h1>
         </div>
 
-        {/* Navigation Bar */}
-        <nav className=" text-white">
+        <nav className="text-white">
           <div className="container mx-auto flex items-center justify-between py-3 px-6">
-            {/* Hamburger Icon for Mobile */}
+            {/* Hamburger Icon */}
             <div className="block md:hidden">
-              <Menu
-                className="w-8 h-8 cursor-pointer"
-                onClick={toggleSidebar}
-              />
+              <Menu className="w-8 h-8 cursor-pointer" />
             </div>
 
-            {/* Navbar Links - Hidden on Mobile */}
+            {/* Navbar Links */}
             <ul className="hidden md:flex space-x-8 text-lg">
-              <li>
-                <Link href="/" className="hover:text-gray-300">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/menu" className="hover:text-gray-300">
-                  Menu
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-gray-300">
-                  Blog
-                </Link>
-              </li>
-              <li className="group relative">
-                <Link href="/about" className="hover:text-gray-300">
-                  About
-                </Link>
-                {/* Submenu */}
-                <ul className="absolute hidden group-hover:block bg-black bg-opacity-90 mt-2 space-y-4 p-4 rounded-lg">
-                  <li>
-                    <Link href="/about/faq" className="hover:text-gray-300">
-                      FAQ
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/about/chefs" className="hover:text-gray-300">
-                      Our Chefs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/about/signup" className="hover:text-gray-300">
-                      Sign Up
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/about/signin" className="hover:text-gray-300">
-                      Sign In
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <Link href="/shop" className="hover:text-gray-300">
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-gray-300">
-                  Contact
-                </Link>
-              </li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/menu">Menu</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/faq">FAQ</Link></li> {/* FAQ Link */}
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
 
-            {/* Search Bar and Add to Cart */}
-            <div className="hidden md:flex items-center space-x-4">
-              {/* Search Bar */}
-              <div className="relative">
-                <Input
-                  placeholder="Search..."
-                  className=" border-solid border-2 border-orange-500 rounded-full  pl-10"
-                />
-                <Search
-                  className="absolute left-3 top-2.5 text-gray-300"
-                  size={18}
-                />
-              </div>
+            {/* Cart, Wishlist, and Login Buttons */}
+            <div className="container flex items-center justify-between py-3 px-6">
+              <div className=" items-center space-x-4 ml-auto"> {/* ml-auto pushes it to the right */}
+                {/* Cart Icon */}
+                <Link href="/cart">
+                  <Button variant="default" className=" items-center space-x-2 hover:text-orange-500">
+                    <ShoppingCart />
+                    <span>{cart.length}</span>
+                  </Button>
+                </Link>
 
-              {/* Add to Cart Button */}
-              <Button
-                variant="default"
-                className=" bg-transparent hover:bg-gray-200"
-              >
-                <ShoppingCart className="mr-2" size={10} /> 
-              </Button>
+                {/* Wishlist Icon */}
+                <Link href="/wishlist">
+                  <Button variant="default" className=" items-center space-x-2 hover:text-orange-500">
+                    <Heart />
+                    <span>{wishlist.length}</span>
+                  </Button>
+                </Link>
+
+                {/* Login Icon */}
+                <Link href="/login">
+                  <Button variant="default" className="items-center space-x-2 hover:text-orange-500">
+                    <User />
+                    <span></span>
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
-
-        {/* Sidebar Menu (Mobile) */}
-        {isOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-50">
-            <div className="flex justify-end p-4">
-              <X
-                className="w-8 h-8 text-white cursor-pointer"
-                onClick={toggleSidebar}
-              />
-            </div>
-            <ul className="flex flex-col items-center space-y-6 text-xl mt-10">
-              <li>
-                <Link href="/" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/menu" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  Menu
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-gray-300" onClick={toggleSidebar}>
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
       </header>
-      </>
+    </>
   );
 }

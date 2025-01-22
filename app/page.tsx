@@ -8,7 +8,7 @@ import OurMenu from './Component/Menu'
 import MeetChefsTestimonials from './Component/Chefs'
 import ActiveProcess from './Component/Section'
 import BlogSection from './Component/Blog'
-import Footer from './Component/Footer'
+
 
 function page() {
   return (
@@ -21,7 +21,6 @@ function page() {
       < MeetChefsTestimonials />
       <ActiveProcess />
       <BlogSection />
-      <Footer/>
     </div>
   )
 }

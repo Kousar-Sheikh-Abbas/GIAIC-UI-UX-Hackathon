@@ -4,6 +4,7 @@ import image from "../images/img6.png";
 import leaf from "../images/img5.png";
 import dish1 from "../images/img4.png";
 import dish3 from "../images/img7.png";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -17,8 +18,8 @@ export default function HeroSection() {
           Discover an unforgettable dining experience with our exquisite menu crafted by top chefs.
         </p>
         <button className="bg-orange-500 text-black py-2 px-6 rounded-lg hover:bg-gray-300 transition">
-          See Menu
-        </button>
+  <Link href="/menu">See Menu</Link>
+</button>
       </div>
 
       {/* Right Side - Image with Circular Transparent Border */}
